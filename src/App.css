@@ -25,7 +25,13 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: black;
+  text-decoration: none;
+  transition: all 100ms ease-in-out;
+}
+
+.App-link:hover {
+  opacity: .6;
 }
 
 @keyframes App-logo-spin {
