@@ -1,11 +1,11 @@
 import "./App.css";
 import data from "./data/sample";
-import SongCard from "./components/SongCard";
+import TrackDetail from "./components/TrackDetail";
 
 function App() {
   return (
     <div className="App">
-      <SongCard data={data} />
+      <TrackDetail data={data} />
     </div>
   );
 }
