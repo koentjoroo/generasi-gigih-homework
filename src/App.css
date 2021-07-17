@@ -1,4 +1,7 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 1rem;
   min-height: 100vh;
   background-color: var(--dark-background-color);

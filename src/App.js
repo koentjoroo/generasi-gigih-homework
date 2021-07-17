@@ -1,11 +1,12 @@
 import "./App.css";
+import Tracks from './components/Tracks'
+import Player from './components/Player'
 import data from "./data/sample";
-import TrackDetail from "./components/TrackDetail";
 
 function App() {
   return (
     <div className="App">
-      <TrackDetail data={data} />
+      <Tracks data={data} />
     </div>
   );
 }

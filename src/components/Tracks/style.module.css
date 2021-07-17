@@ -1,0 +1,10 @@
+.trackList {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.trackList li {
+    margin: .5rem;
+    width: 300px;
+}
