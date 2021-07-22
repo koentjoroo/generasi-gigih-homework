@@ -4,24 +4,25 @@ import Tracks from '../../components/Tracks'
 import Link from '../../components/Link'
 import getReturnedParams from '../../utils/getReturnedParams'
 import getSpotifyAuthUrl from '../../utils/getSpotifyAuthUrl'
+import fetchFromSpotifyApi from '../../utils/fetchFromSpotifyApi'
 import data from '../../data/sample'
 
-const SearchTrack = props => {
+const SearchTrack = () => {
     const spotifyAuthUrl = getSpotifyAuthUrl()
 
+    const [isLoading, setIsLoading] = useState(false)
     const [authInfo, setAuthInfo] = useState({isAuth: false})
     const [tracks, setTracks] = useState(data)
 
     const handleSearch = async query => {
         const SEARCH_API_ENDPOINT = `https://api.spotify.com/v1/search`
         const SEARCH_TYPE = `track`
-        const res = await fetch(`${SEARCH_API_ENDPOINT}?q=${query}&type=${SEARCH_TYPE}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + authInfo.access_token
-            }
-        }).then(res => res.json())
-        setTracks(res.tracks.items)
+        const URL = `${SEARCH_API_ENDPOINT}?q=${query}&type=${SEARCH_TYPE}`
+        
+        setIsLoading(true)
+        const result = await fetchFromSpotifyApi(URL, authInfo.access_token)
+        setTracks(result.tracks.items)
+        setIsLoading(false)
     }
 
     useEffect(() => {
@@ -34,11 +35,11 @@ const SearchTrack = props => {
     return authInfo.isAuth ? (
         <div>
             <SearchBar handleSearch={handleSearch} />
-            <Tracks tracks={tracks} />
+            { isLoading ? <h3>Loading...</h3> : <Tracks tracks={tracks} /> }
         </div>
     ) : (
         <div style={{ textAlign: 'center' }}>
-            <p>Before using the app, pwease login to Spotify <Link to={spotifyAuthUrl}><span style={{ color: 'white' }}>here</span></Link>.</p>
+            <p>Before using the app, pwease login to Spotify <Link to={spotifyAuthUrl}><span style={{ color: 'white' }} >here</span></Link>.</p>
         </div>
     )
 }
