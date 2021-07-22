@@ -1,19 +1,7 @@
 import { useState } from "react"
 import Track from "./Track"
 
-const Tracks = ({ tracks }) => {
-  const [selectedTracks, setSelectedTracks] = useState([])
-
-  const handleSelect = uri => {
-    const newSelectedTracks = selectedTracks
-    if (newSelectedTracks.includes(uri)) {
-      newSelectedTracks.splice(0, 1, uri)
-    } else {
-      newSelectedTracks.push(uri)
-    }
-    setSelectedTracks(newSelectedTracks)
-  }
-
+const Tracks = ({ tracks, handleSelect, selectedTracks }) => {
   return (
     <div>
       <h1>Tracks</h1>
@@ -22,7 +10,7 @@ const Tracks = ({ tracks }) => {
           tracks.map(track => (
             <Track
               handleSelect={handleSelect}
-              isSelected={selectedTracks.includes(track.uri) ? true : false}
+              isSelected={selectedTracks.includes(track.uri)}
               track={track}
               key={track.id}
             />
