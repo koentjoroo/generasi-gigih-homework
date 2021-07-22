@@ -1,12 +1,10 @@
 import "./App.css";
-import Tracks from './components/Tracks'
-import Player from './components/Player'
-import data from "./data/sample";
+import SearchTrack from './pages/SearchTrack'
 
 function App() {
   return (
     <div className="App">
-      <Tracks data={data} />
+      <SearchTrack />
     </div>
   );
 }

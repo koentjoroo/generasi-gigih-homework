@@ -1,26 +1,32 @@
-import Card from "../../Card";
 import Link from "../../Link";
 import style from "./style.module.css";
 
 
-const Track = (props) => {
-  const artists = props.artists.map((artist, index) => {
-      const isLast = index === props.artists.length - 1;
+const Track = ({track}) => {
+  const artists = track.artists.map((artist, index) => {
+      const isLast = index === track.artists.length - 1;
       return (
         <Link to={artist.external_urls.spotify} key={artist.id}>
-          {isLast ? artist.name : `${artist.name},`}
+          {isLast ? artist.name : `${artist.name}, `}
         </Link>
       );
     });
 
-  return (
-    <Card>
-      <img className={style.image} src={props.image} width="240px" />
-      <a className={style.title} href="#">
-        {props.title}
-      </a>
-      <a className={style.artist}>{artists}</a>
-    </Card>
+    const image = track.album.images.find(image => image.width === 64)
+
+    return (
+    <li className={style.wrapper}>
+      <img className={style.image} src={image.url} />
+      <div className={style.info}>
+        <a className={style.title}>
+          {track.name}
+        </a>
+        <p className={style.artist}>{artists}</p>
+      </div>
+      <div className={style.action}>
+        <button><Link to={track.external_urls.spotify} isExternal>Play on Spotify</Link></button>
+      </div>
+    </li>
   );
 };
 
