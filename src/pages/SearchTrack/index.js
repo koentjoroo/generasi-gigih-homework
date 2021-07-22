@@ -21,7 +21,6 @@ const SearchTrack = props => {
                 'Authorization': 'Bearer ' + authInfo.access_token
             }
         }).then(res => res.json())
-        console.log(res.tracks.items)
         setTracks(res.tracks.items)
     }
 
@@ -39,7 +38,7 @@ const SearchTrack = props => {
         </div>
     ) : (
         <div style={{ textAlign: 'center' }}>
-            <p>Before using the app, pwease login to Spotify <Link to={spotifyAuthUrl}>here</Link>.</p>
+            <p>Before using the app, pwease login to Spotify <Link to={spotifyAuthUrl}><span style={{ color: 'white' }}>here</span></Link>.</p>
         </div>
     )
 }

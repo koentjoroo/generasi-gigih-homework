@@ -1,8 +1,19 @@
+import {useState, useEffect} from 'react'
 import Link from "../../Link";
 import style from "./style.module.css";
 
 
-const Track = ({track}) => {
+const Track = props => {
+  const {track, handleSelect} = props
+  const [isSelected, setIsSelected] = useState(false)
+
+  const handleClick = () => {
+    handleSelect(track.uri)
+    setIsSelected(!isSelected)
+  }
+
+  useEffect(() => props.isSelected && setIsSelected(true), [])
+
   const artists = track.artists.map((artist, index) => {
       const isLast = index === track.artists.length - 1;
       return (
@@ -24,7 +35,8 @@ const Track = ({track}) => {
         <p className={style.artist}>{artists}</p>
       </div>
       <div className={style.action}>
-        <button><Link to={track.external_urls.spotify} isExternal>Play on Spotify</Link></button>
+        <Link to={track.external_urls.spotify} isExternal>Play on Spotify</Link>
+        <button onClick={handleClick} >{ isSelected ? 'Deselect' : 'Select' }</button>
       </div>
     </li>
   );
