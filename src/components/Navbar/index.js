@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import style from './style.module.css'
 
-const SearchBar = props => {
+const Navbar = props => {
     const [query, setQuery] = useState('')
 
     const handleChange = e => {
@@ -21,4 +21,4 @@ const SearchBar = props => {
     )
 }
 
-export default SearchBar
+export default Navbar

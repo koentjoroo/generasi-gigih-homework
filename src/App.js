@@ -1,10 +1,10 @@
 import "./App.css";
-import SearchTrack from './pages/SearchTrack'
+import Index from './pages/index'
 
 function App() {
   return (
     <div className="App">
-      <SearchTrack />
+      <Index />
     </div>
   );
 }
