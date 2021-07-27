@@ -3,7 +3,7 @@ const Main = ({ style, children }) => {
     <main
       style={{
         display: "grid",
-        gridTemplateColumns: "1fr 2fr",
+        gridTemplateColumns: "3fr 1fr",
         columnGap: "1rem",
         marginTop: "1rem",
         ...style,
