@@ -10,6 +10,10 @@ export const spotifyAuthUrl = () => {
     return `https://accounts.spotify.com/authorize?${options}`
 };
 
+export const authorize = () => {
+    window.location.replace(spotifyAuthUrl())
+}
+
 export const getProfile = (accessToken) => {
     return fetch(`${BASE_URL}/me`, {
         headers: { 'Authorization': 'Bearer ' + accessToken }

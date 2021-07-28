@@ -3,9 +3,9 @@ const Main = ({ style, children }) => {
     <main
       style={{
         display: "grid",
-        gridTemplateColumns: "3fr 1fr",
-        columnGap: "1rem",
-        marginTop: "1rem",
+        gridTemplateColumns: "1fr 3fr 1fr",
+        columnGap: "2rem",
+        padding: "1rem",
         ...style,
       }}
     >

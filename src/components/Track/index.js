@@ -1,4 +1,5 @@
 import Link from '../Link'
+import Button from '../Button'
 import style from './style.module.css'
 
 const Track = ({ track, handleSelect, isSelected }) => {
@@ -21,9 +22,9 @@ const Track = ({ track, handleSelect, isSelected }) => {
         <p className={style.artist}>{artists}</p>
       </span>
       <span className={style.action}>
-        <button onClick={() => handleSelect(track.uri)}>
+        <Button onClick={() => handleSelect(track.uri)} variant={isSelected ? 'secondary' : 'primary'} >
           {isSelected ? 'Deselect' : 'Select'}
-        </button>
+        </Button>
       </span>
     </div>
   )

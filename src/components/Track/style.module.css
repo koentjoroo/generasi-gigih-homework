@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     padding: .75rem;
-    border-radius: 12px;
+    border-radius: 8px;
     background-color: var(--dark-foreground-color);
     margin: .75rem 0;
     transition: all 150ms ease-out;
@@ -23,8 +23,8 @@ a:hover {
 }
 
 .image {
-    border-radius: 16px;
-    margin-right: .75rem;
+    border-radius: 2px;
+    margin-right: 1rem;
 }
 
 .title {
@@ -44,27 +44,4 @@ a:hover {
 .action {
     flex: 1;
     text-align: right;
-}
-
-.action button {
-    outline: none;
-    border: none;
-    border-radius: 16px;
-    margin-left: 1rem;
-    padding: 1rem;
-    color: white;
-    background-color: green;
-    opacity: .8;
-    font-size: 1em;
-    font-weight: 400;
-    cursor: pointer;
-    transition: all 150ms ease-out;
-}
-
-.action button:hover {
-    opacity: 1;
-}
-
-.action button a {
-    color: white;
 }

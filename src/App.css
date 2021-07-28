@@ -5,5 +5,5 @@
   padding: 1rem;
   min-height: 100vh;
   background-color: var(--dark-background-color);
-  color: var(--dark-foreground-color);
+  color: var(--dark-text-color);
 }

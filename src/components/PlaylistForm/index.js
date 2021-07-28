@@ -1,9 +1,15 @@
-import style from "./style.module.css"
+import style from './style.module.css'
+import Button from '../Button'
 
-const PlaylistForm = ({ form, handleSubmit, handleFormChanges }) => {
+const PlaylistForm = ({
+  form,
+  handleSubmit,
+  handleFormChanges,
+  clearSelection,
+}) => {
   return (
     <div className={style.wrapper}>
-      <h3>Create Playlist</h3>
+      <h2>Create Playlist</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>
         <input
@@ -16,11 +22,16 @@ const PlaylistForm = ({ form, handleSubmit, handleFormChanges }) => {
         <label htmlFor="description">Description</label>
         <textarea
           name="description"
-          minLength="10"
+          minLength="20"
           onChange={handleFormChanges}
           value={form.description}
         ></textarea>
-        <input type="submit" value="Create" />
+        <div style={{ textAlign: 'right' }}>
+          <Button onClick={clearSelection} type="button" variant="transparent">
+            Clear
+          </Button>
+          <Button onClick={handleSubmit}>Create</Button>
+        </div>
       </form>
     </div>
   )

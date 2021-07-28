@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import data from '../data/sample'
-import Link from '../components/Link'
 import Navbar from '../components/Navbar'
 import Track from '../components/Track'
 import PlaylistForm from '../components/PlaylistForm'
+import Button from '../components/Button'
 import Main from '../layout/Main'
 import {
   getProfile,
@@ -18,32 +18,10 @@ import { storeUser } from '../store/auth'
 
 // TODO: Refactor the code
 const SearchTrack = () => {
-  const { isAuthenticated, accessToken } = useAuth()
-
-  return isAuthenticated ? (
-    <AuthPage accessToken={accessToken} />
-  ) : (
-    <UnauthPage />
-  )
-}
-
-const UnauthPage = () => {
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <p>
-        Before using the app, pwease login to Spotify
-        <Link to={spotifyAuthUrl()}>
-          <span style={{ color: 'white' }}> here</span>
-        </Link>
-        .
-      </p>
-    </div>
-  )
-}
-
-const AuthPage = props => {
   const user = useSelector(state => state.auth.user)
   const dispatch = useDispatch()
+
+  const { isAuthenticated, accessToken } = useAuth()
 
   const [tracks, setTracks] = useState(data)
   const [selectedTracks, setSelectedTracks] = useState([])
@@ -54,8 +32,10 @@ const AuthPage = props => {
   })
 
   useEffect(() => {
-    getProfile(props.accessToken).then(user => dispatch(storeUser(user)))
-  }, [])
+    if (isAuthenticated) {
+      getProfile(accessToken).then(user => dispatch(storeUser(user)))
+    }
+  }, [isAuthenticated, accessToken])
 
   const handleFormChanges = e =>
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -71,23 +51,25 @@ const AuthPage = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    postPlaylist(props.accessToken, user.id, {
+    postPlaylist(accessToken, user.id, {
       name: form.title,
       description: form.description,
       public: false,
-    }).then(playlist => {
-      return postPlaylistTracks(props.accessToken, playlist.id, {
-        uris: selectedTracks
-      })
-    }).then(() => {
-      setSelectedTracks([])
-      alert('Playlist created')
     })
+      .then(playlist => {
+        return postPlaylistTracks(accessToken, playlist.id, {
+          uris: selectedTracks,
+        })
+      })
+      .then(() => {
+        setSelectedTracks([])
+        alert('Playlist created')
+      })
   }
 
   const handleSearch = q => {
     setIsLoading(true)
-    getTracks(props.accessToken, {
+    getTracks(accessToken, {
       q,
       type: 'track',
       limit: 12,
@@ -97,14 +79,19 @@ const AuthPage = props => {
     })
   }
 
+  const clearSelection = () => {
+    setSelectedTracks([])
+  }
+
   return (
     <div>
       <Navbar handleSearch={handleSearch} />
       <Main>
+        <div>Sidebar WIP...</div>
         <div>
-          <h3>Tracks</h3>
+          <h2>Tracks</h2>
           {isLoading ? (
-            <h3>Loading...</h3>
+            <p>Loading...</p>
           ) : (
             tracks.map(track => {
               const isSelected = selectedTracks.includes(track.uri)
@@ -123,6 +110,7 @@ const AuthPage = props => {
           form={form}
           handleSubmit={handleSubmit}
           handleFormChanges={handleFormChanges}
+          clearSelection={clearSelection}
         />
       </Main>
     </div>
