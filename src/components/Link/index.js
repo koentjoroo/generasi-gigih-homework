@@ -6,7 +6,7 @@ export default function Link({ to: url, isExternal = false, children }) {
       className={style.link}
       href={url}
       target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noreferrer" : undefined}
+      rel={isExternal ? "noreferrer noopener" : undefined}
     >
       {children}
     </a>

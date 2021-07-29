@@ -1,9 +1,11 @@
-# Getting Started with Create React App
+# GenerasiGIGIH Intermediate Level Homework
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Dependencies Used
 - [Axios](https://github.com/axios/axios)
+- [React Icons](https://react-icons.github.io/react-icons)
+- [React Router](https://reactrouter.com/web)
 
 ## Available Scripts
 

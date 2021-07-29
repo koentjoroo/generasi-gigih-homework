@@ -1,9 +1,12 @@
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 1rem;
   min-height: 100vh;
   background-color: var(--dark-background-color);
   color: var(--dark-text-color);
+}
+
+.App > main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 2rem;
 }

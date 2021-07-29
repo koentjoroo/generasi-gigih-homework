@@ -4,20 +4,24 @@ import Button from '../Button'
 import style from './style.module.css'
 import { FaSpotify } from 'react-icons/fa'
 import { FiSearch } from 'react-icons/fi'
-import { authorize } from '../../libs/spotify'
-import { useSelector } from 'react-redux'
+import { authorize, getTracks } from '../../libs/spotify'
+import { useSelector, useDispatch } from 'react-redux'
+import { setTracks } from '../../store/playlist'
 
-const Navbar = props => {
+const Navbar = () => {
   const [query, setQuery] = useState('')
-  const { isAuthenticated, user } = useSelector(state => state.auth)
+  
+  const { isAuthenticated, accessToken, user } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
-  const handleChange = e => {
-    setQuery(e.target.value)
-  }
-
-  const handleSearch = e => {
+  const handleSubmit = e => {
     e.preventDefault()
-    query ? props.handleSearch(query) : alert('Pwease input the query')
+    if (!query) alert('Pwease input the query')
+    getTracks(accessToken, {
+      q: query,
+      type: 'track',
+      limit: 12,
+    }).then(res => dispatch(setTracks(res.tracks.items)))
   }
 
   return (
@@ -25,21 +29,21 @@ const Navbar = props => {
       <div className={style.logo}>
         <Link to='/' >GenGIGIH</Link>
       </div>
-      <form className={style.search} onSubmit={handleSearch}>
+      <form className={style.search} onSubmit={handleSubmit}>
         <input
           type="text"
           name="query"
           placeholder="Search..."
-          onChange={handleChange}
+          onChange={e => setQuery(e.target.value)}
           value={query}
         />
-        <Button onClick={handleSearch} variant='transparent' >
+        <Button onClick={handleSubmit} variant='transparent' >
           <FiSearch size="1.25em" style={{ margin: 0 }} />
         </Button>
       </form>
       <div className={style.user}>
         {isAuthenticated ? (
-          'Hello, ' + user.display_name
+          <span>Hello <strong>{user.display_name}</strong></span>
         ) : (
           <Button onClick={authorize} icon={<FaSpotify />}>
             Login to Spotify

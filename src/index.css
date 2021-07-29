@@ -12,6 +12,7 @@ body {
   font-family: 'Inter', 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: overlay;
 }
 
 code {
@@ -40,4 +41,21 @@ button {
   outline: none;
   border: none;
   background: none;
+}
+
+::-webkit-scrollbar {
+  width: .5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: var(--dark-foreground-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-button-color);
 }
