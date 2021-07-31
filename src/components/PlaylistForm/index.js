@@ -1,8 +1,8 @@
-import style from './style.module.css'
-import Button from '../Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearSelectedTracks, setForm } from '../../store/playlist'
 import { postPlaylist, postPlaylistTracks } from '../../libs/spotify'
+import Button from '../Button'
+import style from './style.module.css'
 
 const PlaylistForm = () => {
   const { accessToken, user } = useSelector(state => state.auth)
@@ -10,7 +10,7 @@ const PlaylistForm = () => {
   const dispatch = useDispatch()
 
   const handleFormChanges = e => {
-    dispatch(setForm({[e.target.name]: e.target.value}))
+    dispatch(setForm({ [e.target.name]: e.target.value }))
   }
 
   const clearSelection = () => dispatch(clearSelectedTracks())
@@ -34,32 +34,26 @@ const PlaylistForm = () => {
   }
 
   return (
-    <div className={style.wrapper}>
-      <h2>Create Playlist</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          name="title"
-          minLength="10"
-          onChange={handleFormChanges}
-          value={form.title}
-        />
-        <label htmlFor="description">Description</label>
-        <textarea
-          name="description"
-          minLength="20"
-          onChange={handleFormChanges}
-          value={form.description}
-        ></textarea>
-        <div style={{ textAlign: 'right' }}>
-          <Button onClick={clearSelection} type="button" variant="transparent">
-            Clear
-          </Button>
-          <Button onClick={handleSubmit}>Create</Button>
-        </div>
-      </form>
-    </div>
+    <form className={style.form} onSubmit={handleSubmit}>
+      <label htmlFor="title">Title</label>
+      <input
+        type="text"
+        name="title"
+        minLength="10"
+        onChange={handleFormChanges}
+        value={form.title}
+      />
+      <label htmlFor="description">Description</label>
+      <textarea
+        name="description"
+        minLength="20"
+        onChange={handleFormChanges}
+        value={form.description}
+      ></textarea>
+      <div style={{ textAlign: 'right', marginTop: '1rem' }}>
+        <Button onClick={handleSubmit}>Create</Button>
+      </div>
+    </form>
   )
 }
 

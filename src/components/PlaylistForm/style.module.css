@@ -1,18 +1,14 @@
-.wrapper {
-    margin-bottom: 1rem;
-}
-
-.wrapper form {
-    margin-top: .5em;
+.form {
+    margin: .25rem;
     color: var(--dark-text-color);
 }
 
-.wrapper label, .wrapper input, .wrapper textarea {
+.form label, .form input, .form textarea {
     display: block;
     margin-bottom: .5rem;
 }
 
-.wrapper input, .wrapper textarea  {
+.form input, .form textarea  {
     outline: none;
     border: none;
     border-radius: 9999px;
@@ -21,25 +17,25 @@
     color: var(--dark-text-color);
 }
 
-.wrapper textarea {
+.form textarea {
     border-radius: 24px;
     font-family: inherit;
     resize: vertical;
     min-height: 10em;
 }
 
-.wrapper input:not([type=submit]), .wrapper textarea  {
+.form input:not([type=submit]), .form textarea  {
     width: 100%;
     background-color: var(--dark-foreground-color);
 }
 
-.wrapper input[type=submit] {
+.form input[type=submit] {
     background-color: green;
     cursor: pointer;
     opacity: .8;
     transition: all 150ms ease-out;
 }
 
-.wrapper input[type=submit]:hover {
+.form input[type=submit]:hover {
     opacity: 1;
 }
