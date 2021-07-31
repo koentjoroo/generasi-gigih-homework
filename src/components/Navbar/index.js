@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Link from '../Link'
 import Button from '../Button'
 import style from './style.module.css'
 import { FaSpotify } from 'react-icons/fa'
@@ -27,7 +26,7 @@ const Navbar = () => {
   return (
     <nav className={style.navbar}>
       <div className={style.logo}>
-        <Link to='/' >GenGIGIH</Link>
+        <a href="/" >GenGIGIH</a>
       </div>
       <form className={style.search} onSubmit={handleSubmit}>
         <input

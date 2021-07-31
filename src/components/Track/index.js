@@ -1,4 +1,3 @@
-import Link from '../Link'
 import Button from '../Button'
 import style from './style.module.css'
 import { useSelector, useDispatch } from 'react-redux'
@@ -21,9 +20,9 @@ const Track = ({ track }) => {
   const artists = track.artists.map((artist, index) => {
     const isLast = index === track.artists.length - 1
     return (
-      <Link to={artist.external_urls.spotify} key={artist.id}>
+      <a href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id}>
         {artist.name + (isLast ? '' : ', ')}
-      </Link>
+      </a>
     )
   })
 
