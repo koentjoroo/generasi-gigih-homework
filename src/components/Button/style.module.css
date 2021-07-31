@@ -18,6 +18,11 @@
     opacity: .8;
 }
 
+.button:disabled {
+    opacity: .2;
+    cursor: default;
+}
+
 .button-secondary {
     background-color: var(--secondary-button-color);
 }
