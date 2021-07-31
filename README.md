@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Dependencies Used
 - [Axios](https://github.com/axios/axios)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Redux](https://react-redux.js.org/)
 - [React Icons](https://react-icons.github.io/react-icons)
 - [React Router](https://reactrouter.com/web)
 
