@@ -6,6 +6,7 @@
   --dark-text-color: #d4d4d4;
   --primary-button-color: #1db954;
   --secondary-button-color: #4b4b4b;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -23,6 +24,10 @@ code {
 
 * {
   box-sizing: border-box;
+}
+
+a {
+  cursor: pointer;
 }
 
 h1,
@@ -45,7 +50,7 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: .5rem;
+  width: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
