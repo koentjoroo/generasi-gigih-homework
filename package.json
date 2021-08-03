@@ -1,6 +1,6 @@
 {
   "name": "generasi-gigih-homework",
-  "version": "0.4.2",
+  "version": "0.5.1",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
