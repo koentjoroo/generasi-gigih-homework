@@ -5,6 +5,7 @@
     border-radius: 9999px;
     font-size: 1rem;
     font-weight: 600;
+    background-color: var(--primary-button-color);
     color: var(--dark-heading-color);
     cursor: pointer;
     transition: all 150ms ease-out;
@@ -37,4 +38,8 @@
 
 .button-transparent {
     background-color: transparent;
+}
+
+.button-small {
+    padding: .5em;
 }
