@@ -1,7 +1,9 @@
-import Button from '../Button'
-import style from './style.module.css'
+import { Flex, Button, Image, Text } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addSelectedTracks, substractSelectedTracks } from '../../store/playlist'
+import {
+  addSelectedTracks,
+  substractSelectedTracks,
+} from '../../store/playlist'
 
 const Track = ({ track }) => {
   const dispatch = useDispatch()
@@ -20,7 +22,12 @@ const Track = ({ track }) => {
   const artists = track.artists.map((artist, index) => {
     const isLast = index === track.artists.length - 1
     return (
-      <a href={artist.external_urls.spotify} target='_blank' rel='noreferrer' key={artist.id}>
+      <a
+        href={artist.external_urls.spotify}
+        target="_blank"
+        rel="noreferrer"
+        key={artist.id}
+      >
         {artist.name + (isLast ? '' : ', ')}
       </a>
     )
@@ -29,18 +36,23 @@ const Track = ({ track }) => {
   const image = track.album.images.find(image => image.width === 64)
 
   return (
-    <div className={style.wrapper}>
-      <img className={style.image} src={image.url} alt={track.name} />
-      <span className={style.info}>
-        <a className={style.title} href={track.external_urls.spotify}>{track.name}</a>
-        <p className={style.artist}>{artists}</p>
-      </span>
-      <span className={style.action}>
-        <Button onClick={handleSelect} variant={isSelected ? 'secondary' : 'primary'} >
+    <Flex align="center" my={2} p={2} borderRadius={4} bg="trueGray.800">
+      <Image mr={4} borderRadius={2} src={image.url} alt={track.name} />
+      <Flex direction="column" flex={1}>
+        <Text fontWeight="bold">{track.name}</Text>
+        <Text>{artists}</Text>
+      </Flex>
+      <Flex>
+        <Button
+          onClick={handleSelect}
+          m={2}
+          variant="solid"
+          bg={isSelected ? 'transparent' : 'brand.600'}
+        >
           {isSelected ? 'Deselect' : 'Select'}
         </Button>
-      </span>
-    </div>
+      </Flex>
+    </Flex>
   )
 }
 
