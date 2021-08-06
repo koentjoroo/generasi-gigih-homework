@@ -1,8 +1,6 @@
 .App {
   padding: 1rem;
   min-height: 100vh;
-  background-color: var(--dark-background-color);
-  color: var(--dark-text-color);
 }
 
 .App > main {
