@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { clearSelectedTracks } from '../store/playlist'
+import { Heading, Flex, Center, Button } from '@chakra-ui/react'
 import { FaPlus } from 'react-icons/fa'
+import { clearSelectedTracks } from '../store/playlist'
 import Track from '../components/Track'
 import Modal from '../components/Modal'
 import PlaylistForm from '../components/PlaylistForm'
-import Button from '../components/Button'
 
 const CreatePlaylist = () => {
   const dispatch = useDispatch()
@@ -14,32 +14,29 @@ const CreatePlaylist = () => {
 
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <h2>Tracks</h2>
-        <span style={{ display: 'flex', alignItems: 'center' }}>
+      <Flex align="center" justify="space-between" >
+        <Heading as="h2" size="lg">Tracks</Heading>
+        <Center>
           <Button
             onClick={() => dispatch(clearSelectedTracks())}
             type="button"
-            variant="transparent"
+            variant="ghost"
+            color="trueGray.300"
+            _hover={{ bg: 'trueGray.800' }}
             disabled={selectedTracks.length === 0}
           >
             Clear Selection
           </Button>
           <Button
-            icon={<FaPlus />}
+            leftIcon={<FaPlus />}
             onClick={() => setIsModalOpen(true)}
             disabled={selectedTracks.length === 0}
+            ml={2}
           >
             Create Playlist
           </Button>
-        </span>
-      </div>
+        </Center>
+      </Flex>
       <div>
         {tracks.map(track => (
           <Track track={track} key={track.id} />
