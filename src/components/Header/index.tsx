@@ -9,23 +9,24 @@ import {
   useToast,
   Avatar,
 } from '@chakra-ui/react'
-import { FiSearch, FiActivity } from 'react-icons/fi'
+import { FiSearch } from 'react-icons/fi'
 import { FaSpotify } from 'react-icons/fa'
-import { useSelector, useDispatch } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../store'
 import { useState } from 'react'
 import { setTracks } from '../../store/playlist'
 import { authorize, getTracks } from '../../libs/spotify'
+import * as React from 'react'
 
 const Header = () => {
   const [query, setQuery] = useState('')
 
-  const dispatch = useDispatch()
   const toast = useToast()
-  const { isAuthenticated, accessToken, user } = useSelector(
+  const dispatch = useAppDispatch()
+  const { isAuthenticated, accessToken, user } = useAppSelector(
     state => state.auth
   )
 
-  const handleSubmit = e => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
     if (query.length <= 3) {
       return toast({
@@ -39,7 +40,7 @@ const Header = () => {
     getTracks(accessToken, {
       q: query,
       type: 'track',
-      limit: 12,
+      limit: '12',
     }).then(res => dispatch(setTracks(res.tracks.items)))
   }
 
@@ -73,6 +74,7 @@ const Header = () => {
             isRound
             variant="ghost"
             icon={<FiSearch />}
+            aria-label="search"
             _hover={{ bg: 'trueGray.800' }}
           />
         </HeaderItem>
@@ -81,11 +83,11 @@ const Header = () => {
         {isAuthenticated ? (
           <>
             <Text mr={4} fontWeight="bold">
-              {user.display_name}
+              {user?.display_name}
             </Text>
             <Avatar
-              name={user.display_name}
-              src={user.images?.[0].url ?? 'https://picsum.photos/36'}
+              name={user?.display_name}
+              src={user?.images?.[0].url ?? 'https://picsum.photos/36'}
             ></Avatar>
           </>
         ) : (
@@ -102,7 +104,7 @@ const Header = () => {
   )
 }
 
-const HeaderItem = props => {
+const HeaderItem = (props: { children: React.ReactNode }) => {
   return (
     <Center w="100%" h="72px">
       {props.children}

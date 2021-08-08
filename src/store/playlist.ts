@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import data from '../data/sample'
+import { PlaylistState } from '../types/store'
 
-const initialState = {
+const initialState: PlaylistState = {
   tracks: data,
   selectedTracks: [],
   form: {
@@ -34,9 +35,7 @@ const playlistSlice = createSlice({
     clearSelectedTracks: state => {
       state.selectedTracks = []
     },
-    clearState: state => {
-      state = initialState
-    },
+    clearState: () => initialState,
   },
 })
 
