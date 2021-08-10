@@ -1,17 +1,10 @@
-import { Flex, Button, Image, Text } from '@chakra-ui/react'
-import { useAppDispatch, useAppSelector } from '../../store'
-import { Artist, Track as SpotifyTrack, Image as SpotifyImage } from '../../types/spotify'
-import {
-  addSelectedTracks,
-  substractSelectedTracks,
-} from '../../store/playlist'
+import { Flex, Button, Image, Text, useColorModeValue } from '@chakra-ui/react'
+import { useAppDispatch, useAppSelector } from 'store'
+import { Artist, Track as SpotifyTrack, Image as SpotifyImage } from 'types/spotify'
+import { addSelectedTracks, substractSelectedTracks } from 'store/playlist'
 import * as React from 'react'
 
-interface TrackProps {
-  track: SpotifyTrack
-}
-
-const Track = ({ track }: TrackProps) => {
+const Track = ({ track }: { track: SpotifyTrack }) => {
   const dispatch = useAppDispatch()
   const selectedTracks = useAppSelector(state => state.playlist.selectedTracks)
 
@@ -45,8 +38,10 @@ const Track = ({ track }: TrackProps) => {
     (image: SpotifyImage) => image.width === 64
   )
 
+  const bg = useColorModeValue('white', 'gray.800')
+
   return (
-    <Flex align="center" my={2} p={2} borderRadius={4} bg="trueGray.800">
+    <Flex align="center" my={2} p={2} borderRadius="lg" bg={bg}>
       <Image mr={4} borderRadius={2} src={image?.url} alt={track.name} />
       <Flex direction="column" flex={1}>
         <Text fontWeight="bold">{track.name}</Text>
@@ -56,8 +51,7 @@ const Track = ({ track }: TrackProps) => {
         <Button
           onClick={handleSelect}
           m={2}
-          variant="solid"
-          bg={isSelected ? 'transparent' : 'brand.600'}
+          variant={isSelected ? 'ghost' : 'solid'}
         >
           {isSelected ? 'Deselect' : 'Select'}
         </Button>
