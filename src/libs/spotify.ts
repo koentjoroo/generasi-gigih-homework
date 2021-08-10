@@ -1,4 +1,4 @@
-import { Playlist, Track, Tracks, UserProfile } from '../types/spotify'
+import { Playlist, Tracks, UserProfile } from 'types/spotify'
 
 const BASE_URL: string = 'https://api.spotify.com/v1'
 

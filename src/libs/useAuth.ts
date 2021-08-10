@@ -1,23 +1,23 @@
 import { useEffect } from 'react'
 import { getProfile } from './spotify'
 import { useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { login, storeUser } from '../store/auth'
+import { useAppDispatch, useAppSelector } from 'store'
+import { login, storeUser } from 'store/auth'
 
 export const useAuth = () => {
-  const { isAuthenticated, accessToken, user } = useSelector(state => state.auth)
-  const dispatch = useDispatch()
+  const { isAuthenticated, accessToken, user } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
   const history = useHistory()
 
   useEffect(() => {
     if (!isAuthenticated && window.location.hash) {
-      const params = window.location.hash.substr(1).split('&')
-      params.forEach(param => {
-        const [key, value] = param.split('=')
+      const params: string[] = window.location.hash.substr(1).split('&')
+      params.forEach((param: string) => {
+        const [key, value]: string[] = param.split('=')
         if (key === 'access_token') dispatch(login(value))
       })
     }
-    if (isAuthenticated && Object.keys(user).length === 0) {
+    if (isAuthenticated && user === null) {
       getProfile(accessToken).then(user => {
         dispatch(storeUser(user))
         history.push('/create-playlist')
@@ -25,5 +25,5 @@ export const useAuth = () => {
     }
   }, [isAuthenticated, accessToken, user, history, dispatch])
 
-  return useSelector(state => state.auth)
+  return useAppSelector(state => state.auth)
 }
