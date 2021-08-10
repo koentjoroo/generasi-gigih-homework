@@ -25,9 +25,11 @@ const playlistSlice = createSlice({
       const index = state.selectedTracks.indexOf(action.payload)
       state.selectedTracks.splice(index, 1)
     },
-    setForm: (state, action) => {
-      const [key, value] = Object.entries(action.payload)[0]
-      state.form[key] = value
+    setFormTitle: (state, action) => {
+      state.form.title = action.payload
+    },
+    setFormDescription: (state, action) => {
+      state.form.description = action.payload
     },
     clearForm: state => {
       state.form = initialState.form
@@ -44,7 +46,8 @@ export const {
   addSelectedTracks,
   substractSelectedTracks,
   clearSelectedTracks,
-  setForm,
+  setFormTitle,
+  setFormDescription,
   clearState
 } = playlistSlice.actions
 
