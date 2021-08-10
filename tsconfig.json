@@ -9,6 +9,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": "./src/",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
