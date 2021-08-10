@@ -62,20 +62,16 @@ const Header = () => {
             type="text"
             placeholder="Search..."
             mr={2}
-            bg="trueGray.800"
-            borderRadius="64px"
+            borderRadius="full"
             isDisabled={!isAuthenticated}
             value={query}
             onChange={e => setQuery(e.target.value)}
-            _hover={{  }}
-            _placeholder={{ color: 'trueGray.400' }}
           />
           <IconButton
             isRound
             variant="ghost"
             icon={<FiSearch />}
             aria-label="search"
-            _hover={{ bg: 'trueGray.800' }}
           />
         </HeaderItem>
       </form>
