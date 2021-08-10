@@ -11,7 +11,7 @@ export const brand = {
   900: "#0f5d2a"
 }
 
-export const trueGray = {
+export const gray = {
   50: "#fafafa",
   100: "#f5f5f5",
   200: "#e5e5e5",

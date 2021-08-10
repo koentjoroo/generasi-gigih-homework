@@ -1,15 +1,15 @@
-import './App.css'
-import theme from './theme'
-import Homepage from './pages/Homepage'
-import CreatePlaylist from './pages/CreatePlaylist'
-import Header from './components/Header'
-import Sidebar from './components/Sidebar'
+import 'App.css'
+import theme from 'theme'
+import Homepage from 'pages/homepage'
+import CreatePlaylist from 'pages/create-playlist'
+import Header from 'components/header'
+import Sidebar from 'components/sidebar'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from 'store'
 import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
-  const { isAuthenticated } = useSelector(state => state.auth)
+  const { isAuthenticated } = useAppSelector(state => state.auth)
   return (
     <div className="App">
       <ChakraProvider theme={theme}>
