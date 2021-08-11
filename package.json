@@ -1,6 +1,6 @@
 {
   "name": "generasi-gigih-homework",
-  "version": "0.5.3",
+  "version": "0.6.1",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^1.6.5",
