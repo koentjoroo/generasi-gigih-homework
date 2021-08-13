@@ -30,15 +30,15 @@ const CreatePlaylistModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: ()
       name: form.title,
       description: form.description,
       public: false,
-    }).then(playlist => {
-      return postPlaylistTracks(accessToken, playlist.id, {
+    }).then(({ data }) => {
+      return postPlaylistTracks(accessToken, data.id, {
         uris: selectedTracks,
       })
     }).then(() => {
       dispatch(clearSelectedTracks())
       onClose()
       return toast({
-        title: 'Playlist Created!',
+        title: 'Woohoo!',
         description: 'Playlist has been created successfully!',
         status: 'success',
         duration: 9000,

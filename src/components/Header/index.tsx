@@ -15,50 +15,51 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
   MenuGroup,
-  MenuOptionGroup,
-  MenuIcon,
-  MenuCommand,
-  MenuDivider,
   Switch,
+  Spinner,
 } from '@chakra-ui/react'
 import { ChevronDownIcon, Search2Icon, MoonIcon, SunIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { FaSpotify } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from 'store'
-import { useState } from 'react'
 import { setTracks } from 'store/playlist'
 import { logout } from 'store/auth'
 import { authorize, getTracks } from 'libs/spotify'
-import * as React from 'react'
+import React, { useState } from 'react'
 
 const Header = () => {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const mode = useColorModeValue
   const toast = useToast()
   const dispatch = useAppDispatch()
   const { colorMode, toggleColorMode } = useColorMode()
   const { isAuthenticated, accessToken, user } = useAppSelector(state => state.auth)
 
   const isDark = colorMode === 'dark'
+  const red = useColorModeValue('red', 'red.600')
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
     if (query.length <= 3) {
       return toast({
-        title: 'Query Error!',
-        description: 'Query must have at least 3 letters.',
+        title: 'Woops!',
+        description: 'Please type at least 3 letters.',
         status: 'error',
         duration: 9000,
         isClosable: true,
       })
     }
+    dispatch(setTracks([]))
+    setIsLoading(true)
     getTracks(accessToken, {
       q: query,
       type: 'track',
       limit: '12',
-    }).then(res => dispatch(setTracks(res.tracks.items)))
+    }).then(res => {
+      dispatch(setTracks(res.data.tracks.items))
+      setIsLoading(false)
+    })
   }
 
   return (
@@ -79,7 +80,7 @@ const Header = () => {
             value={query}
             onChange={e => setQuery(e.target.value)}
           />
-          <IconButton isRound variant="ghost" icon={<Search2Icon />} aria-label="search" />
+          <IconButton isRound variant="ghost" icon={ isLoading ? <Spinner /> : <Search2Icon />} aria-label="search" />
         </HeaderItem>
       </form>
       <HeaderItem>
@@ -107,7 +108,7 @@ const Header = () => {
                     </Flex>
                   </MenuItem>
                   <MenuItem
-                    color={mode('red', 'red.600')}
+                    color={red}
                     icon={<ArrowBackIcon />}
                     onClick={() => dispatch(logout())}
                   >
