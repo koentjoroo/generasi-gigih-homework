@@ -13,9 +13,9 @@ import {
   Button,
   useToast
 } from '@chakra-ui/react'
-import { useAppDispatch, useAppSelector } from 'store'
-import { clearSelectedTracks, setFormTitle, setFormDescription } from 'store/playlist'
-import { postPlaylist, postPlaylistTracks } from 'libs/spotify'
+import { useAppDispatch, useAppSelector } from '../../store'
+import { clearSelectedTracks, setFormTitle, setFormDescription } from '../../store/playlist'
+import { postPlaylist, postPlaylistTracks } from '../../libs/spotify'
 import * as React from 'react'
 
 const CreatePlaylistModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {

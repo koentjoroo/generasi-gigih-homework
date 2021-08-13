@@ -1,7 +1,7 @@
 import { Flex, Button, Image, Text, useColorModeValue } from '@chakra-ui/react'
-import { useAppDispatch, useAppSelector } from 'store'
-import { Artist, Track as SpotifyTrack, Image as SpotifyImage } from 'types/spotify'
-import { addSelectedTracks, substractSelectedTracks } from 'store/playlist'
+import { useAppDispatch, useAppSelector } from '../../store'
+import { Artist, Track as SpotifyTrack, Image as SpotifyImage } from '../../types/spotify'
+import { addSelectedTracks, substractSelectedTracks } from '../../store/playlist'
 import * as React from 'react'
 
 const Track = ({ track }: { track: SpotifyTrack }) => {

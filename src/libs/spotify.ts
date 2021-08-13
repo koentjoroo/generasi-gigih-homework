@@ -1,4 +1,4 @@
-import { Playlist, Tracks, UserProfile } from 'types/spotify'
+import { Playlist, Tracks, UserProfile } from '../types/spotify'
 import axios, { AxiosResponse } from 'axios'
 
 const send = axios.create({

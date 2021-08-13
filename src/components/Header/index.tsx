@@ -21,10 +21,10 @@ import {
 } from '@chakra-ui/react'
 import { ChevronDownIcon, Search2Icon, MoonIcon, SunIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { FaSpotify } from 'react-icons/fa'
-import { useAppDispatch, useAppSelector } from 'store'
-import { setTracks } from 'store/playlist'
-import { logout } from 'store/auth'
-import { authorize, getTracks } from 'libs/spotify'
+import { useAppDispatch, useAppSelector } from '../../store'
+import { setTracks } from '../../store/playlist'
+import { logout } from '../../store/auth'
+import { authorize, getTracks } from '../../libs/spotify'
 import React, { useState } from 'react'
 
 const Header = () => {

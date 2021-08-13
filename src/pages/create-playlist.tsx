@@ -1,10 +1,10 @@
-import { useAppDispatch, useAppSelector } from 'store'
 import { Heading, Flex, Center, Button, useDisclosure } from '@chakra-ui/react'
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons'
-import { clearSelectedTracks } from 'store/playlist'
 import { motion } from 'framer-motion'
-import Track from 'components/track'
-import CreatePlaylistModal from 'components/create-playlist-modal'
+import { useAppDispatch, useAppSelector } from '../store'
+import { clearSelectedTracks } from '../store/playlist'
+import Track from '../components/track'
+import CreatePlaylistModal from '../components/create-playlist-modal'
 
 const CreatePlaylist = () => {
   const dispatch = useAppDispatch()

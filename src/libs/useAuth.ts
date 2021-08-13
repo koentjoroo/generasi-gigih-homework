@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { getProfile } from './spotify'
 import { useHistory } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'store'
-import { login, storeUser } from 'store/auth'
+import { useAppDispatch, useAppSelector } from '../store'
+import { login, storeUser } from '../store/auth'
 
 export const useAuth = () => {
   const { isAuthenticated, accessToken, user } = useAppSelector(state => state.auth)
