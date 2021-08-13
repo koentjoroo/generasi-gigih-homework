@@ -1,6 +1,9 @@
 import { Playlist, Tracks, UserProfile } from 'types/spotify'
+import axios, { AxiosResponse } from 'axios'
 
-const BASE_URL: string = 'https://api.spotify.com/v1'
+const send = axios.create({
+  baseURL: 'https://api.spotify.com/v1',
+})
 
 export const spotifyAuthUrl = (): string => {
   const options: string = new URLSearchParams({
@@ -16,48 +19,41 @@ export const authorize = (): void => {
   window.location.replace(spotifyAuthUrl())
 }
 
-export const getProfile = (accessToken: string): Promise<UserProfile> => {
-  return fetch(`${BASE_URL}/me`, {
+export const getProfile = (accessToken: string): Promise<AxiosResponse<UserProfile>> => {
+  return send.get(`/me`, {
     headers: { Authorization: 'Bearer ' + accessToken },
-  }).then(res => res.json())
+  })
 }
 
-export const getTracks = (
-  accessToken: string,
-  options: Record<string, string>
-): Promise<{ tracks: Tracks }> => {
-  const params: string = new URLSearchParams(options).toString()
-  return fetch(`${BASE_URL}/search?${params}`, {
+export const getTracks = (accessToken: string, params: Object): Promise<AxiosResponse<Tracks>> => {
+  return send.get('/search', {
+    params,
     headers: { Authorization: 'Bearer ' + accessToken },
-  }).then(res => res.json())
+  })
 }
 
 export const postPlaylist = (
   accessToken: string,
-  userId: string,
+  userID: string,
   payload: Object
-): Promise<Playlist> => {
-  return fetch(`${BASE_URL}/users/${userId}/playlists`, {
-    method: 'POST',
+): Promise<AxiosResponse<Playlist>> => {
+  return send.post(`/users/${userID}/playlists`, payload, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + accessToken,
     },
-    body: JSON.stringify(payload),
-  }).then(res => res.json())
+  })
 }
 
 export const postPlaylistTracks = (
   accessToken: string,
-  playlistId: string,
+  id: string,
   payload: Object
-): Promise<{ snapshot_id: string }> => {
-  return fetch(`${BASE_URL}/playlists/${playlistId}/tracks`, {
-    method: 'POST',
+): Promise<AxiosResponse<{ snapshot_id: string }>> => {
+  return send.post(`/playlists/${id}/tracks`, payload, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + accessToken,
     },
-    body: JSON.stringify(payload),
-  }).then(res => res.json())
+  })
 }

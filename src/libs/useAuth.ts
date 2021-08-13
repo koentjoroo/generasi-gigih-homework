@@ -18,8 +18,8 @@ export const useAuth = () => {
       })
     }
     if (isAuthenticated && user === null) {
-      getProfile(accessToken).then(user => {
-        dispatch(storeUser(user))
+      getProfile(accessToken).then(({data}) => {
+        dispatch(storeUser(data))
         history.push('/create-playlist')
       })
     }
