@@ -25,7 +25,7 @@ export const getProfile = (accessToken: string): Promise<AxiosResponse<UserProfi
   })
 }
 
-export const getTracks = (accessToken: string, params: Object): Promise<AxiosResponse<Tracks>> => {
+export const getTracks = (accessToken: string, params: Object): Promise<AxiosResponse<{tracks: Tracks}>> => {
   return send.get('/search', {
     params,
     headers: { Authorization: 'Bearer ' + accessToken },
